@@ -12,7 +12,7 @@ export class MainService {
   getEmployeeUrl = "http://dummy.restapiexample.com/api/v1/employees";
 
   constructor(private http:HttpClient) {
-     this.loadEmployeeData();
+    // this.loadEmployeeData();
    }
 
   loadEmployeeData(){
@@ -29,5 +29,7 @@ export class MainService {
     let data = localStorage.getItem('empData');
     return data;
   }
- 
+  updateEmployeeData(jsonEmpObj:any){
+    localStorage.setItem("empData",jsonEmpObj);
+  }
 }

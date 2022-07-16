@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from './components/home/home.component';
+import { DialogAddEmployeeDialog, DialogEditEmployeeDialog, HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,7 +24,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     LoginComponent,
     HomeComponent,
     PageNotFoundComponent,
-    
+    DialogAddEmployeeDialog,
+    DialogEditEmployeeDialog
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,23 @@
+
+<div mat-dialog-content>
+    <form [formGroup]="editForm" fxLayoutAlign="stretch" fxLayout="column">
+        <mat-form-field>
+            <input matInput placeholder="Enter Employee Name" type="text" formControlName="employee_name" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Enter Employee Salary" type="text" formControlName="employee_salary" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Enter Employee Age" type="text" formControlName="employee_age" required>
+        </mat-form-field>
+        
+    </form>
+ 
+</div>
+<div mat-dialog-actions>
+    <button (click)="cancel()">cancel</button>
+
+    <button (click)="save()">save</button>
+    
+  
+</div>
