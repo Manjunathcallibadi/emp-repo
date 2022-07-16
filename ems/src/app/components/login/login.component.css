@@ -1,0 +1,15 @@
+.bg-image{
+    height: 100vh;
+    width: 100%;
+    background: no-repeat;
+    background-size: cover;
+    background-image: url("/assets/images/HR3.jpg");
+}
+.login{
+    width:30%;
+    float: right;
+    margin-top: 6rem;
+}
+.login-btn{
+    width: 55%;
+}

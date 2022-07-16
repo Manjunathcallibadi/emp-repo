@@ -1,1 +1,15 @@
-<p>login works!</p>
+<div class="bg-image">
+    <div class="container">
+        <div class="login">
+            <form [formGroup]="loginForm">
+                <mat-form-field>
+                    <!-- <mat-label>Employee id</mat-label> -->
+                    <input matInput placeholder="Enter Employee Id" type="text" formControlName="employee_id" required>
+                </mat-form-field>
+                <div>
+                    <button mat-raised-button class="login-btn" type="submit" (click)="login()">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
