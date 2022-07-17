@@ -27,20 +27,23 @@ export class HomeComponent implements OnInit {
 
   empdata: any;
   empdataparsed: any;
+norecords:any;
 
   constructor(private mainService: MainService,private router:Router,public dialog: MatDialog) { }
 
 
   ngOnInit(): void {
-    this.getEmployeeData();
+    this.getEmployeeDetails();
   }
 
 
-  getEmployeeData() {
+  getEmployeeDetails() {
     //get data from local storage
     this.empdata = this.mainService.getEmployeeData();
     this.empdataparsed = JSON.parse(this.empdata);
-
+    if(this.empdataparsed == null){
+      this.norecords = 0;
+    }
     //assigned parsed data to table dataSource
     this.dataSource = new MatTableDataSource(this.empdataparsed);
     this.dataSource.paginator = this.tableOnePaginator;
@@ -49,29 +52,34 @@ export class HomeComponent implements OnInit {
   }
 
 
-  add() {
+  // open dialog for adding new employee
+  addEmployee() {
+    // to open dialog
     const dialogRef = this.dialog.open(DialogAddEmployeeDialog, {
       width: '250px'
     });
 
+    // toclose dialog
     dialogRef.afterClosed().subscribe(result => {
-      this.getEmployeeData();
+      this.getEmployeeDetails();
     });
   }
 
-  onSelectEdit(a: any) {
+  // open dialog for editing employee
+  onEdit(selectedEmployee: any) {
+
     const dialogRef = this.dialog.open(DialogEditEmployeeDialog, {
       width: '250px',
-      data: a,
+      data: selectedEmployee,
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.getEmployeeData();
+      this.getEmployeeDetails();
     });
 
   }
 
-
+// to logout
   logout(){
     this.router.navigate(['login']);
   }
@@ -82,6 +90,7 @@ export class HomeComponent implements OnInit {
 @Component({
   selector: 'dialog-add-employee-dialog',
   templateUrl: 'dialog-add-employee-dialog.html',
+  styleUrls: ['./home.component.css']
 })
 export class DialogAddEmployeeDialog {
   addForm: FormGroup;
@@ -99,12 +108,17 @@ export class DialogAddEmployeeDialog {
 
   }
 
-  save() {
+  // function to save new employee details
+  saveEmployee() {
+    // taking local storage data
     this.empData = this.mainService.getEmployeeData();
     let parsedData = JSON.parse(this.empData);
+
+    // generating new id for new employee
     this.addForm.controls['id'].setValue(parsedData.length + 1);
 
     if(this.addForm.valid){
+
       parsedData.push(this.addForm.value);
       this.mainService.updateEmployeeData(JSON.stringify(parsedData));
       this.toastr.success('Employee added successfully!');
@@ -130,6 +144,8 @@ export interface DialogData {
 @Component({
   selector: 'dialog-edit-employee-dialog',
   templateUrl: 'dialog-edit-employee-dialog.html',
+  styleUrls: ['./home.component.css']
+  
 })
 export class DialogEditEmployeeDialog {
   editForm: FormGroup;
@@ -148,9 +164,8 @@ export class DialogEditEmployeeDialog {
 
   }
 
- 
-
-  save() {
+  // function for editing employee
+  editEmployee() {
     if(this.editForm.valid){
       this.empData = this.mainService.getEmployeeData();
       let parsedData = JSON.parse(this.empData);

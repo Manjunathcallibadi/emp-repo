@@ -13,3 +13,14 @@
 .login-btn{
     width: 100%;
 }
+.form-container{
+    display:flex;
+    justify-content:center;
+}
+.login-form{
+    margin-top: 8%;
+    margin-left: 45%;
+}
+.error-msg{
+    color:red ;
+}

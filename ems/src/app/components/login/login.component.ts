@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    //  console.log(this.loginForm.get('employee_id')?.value);
     if(this.loginForm.get('employee_id')?.value == "MN123"){
       this.router.navigate(['home']);
     }else{

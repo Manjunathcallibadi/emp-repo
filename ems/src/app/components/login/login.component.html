@@ -1,13 +1,11 @@
-
-
 <div class="bg-image">
-    <div style="display:flex;justify-content:center">
-        <form [formGroup]="loginForm" style="margin-top: 8%;margin-left: 45%;">
+    <div class="form-container">
+        <form [formGroup]="loginForm" class="login-form">
             <mat-form-field>
                 <input matInput placeholder="Enter Employee Id" type="text" formControlName="employee_id" required>
             </mat-form-field>
             <div *ngIf="errorMsg">
-            <small style="color:red ;">{{errorMsg}}</small>
+            <small class="error-msg">{{errorMsg}}</small>
             </div>
             <div>
                 <button mat-raised-button class="login-btn" type="submit" (click)="login()">Login</button>

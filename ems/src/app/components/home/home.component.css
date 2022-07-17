@@ -18,7 +18,7 @@
     height: 80vh;
   }
 
-  .addButton{
+  .add-button{
     margin-bottom: 10px;
   }
 
@@ -38,5 +38,28 @@
     background-color:slategrey;
     color:wheat;
     font-size: 15px;
-    
   } 
+  .save-button{
+    margin-left:40px !important;
+  }
+  .margin-top-0{
+    margin-top: 0;
+  }
+  .padding-top-5{
+    padding-top: 5rem;
+  }
+  .logo{
+    height:30px;
+    width:30px;
+    border-radius: 2px;
+  }
+  .table-container{
+    height: 400px;
+    overflow:auto;
+  }
+  .no-records{
+    font-size: 25px;
+    padding: 100px;
+    text-align: center;
+
+  }
