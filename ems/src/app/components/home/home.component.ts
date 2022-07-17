@@ -185,7 +185,7 @@ export class DialogEditEmployeeDialog {
       let parsedData = JSON.parse(this.empData);
 
       for (let i = 0; i < parsedData.length; i++) {
-        if (parsedData[i].id == this.editForm.get('id')?.value) {
+        if (parsedData[i].id == this.data.id) {
           parsedData[i] = this.editForm.value;
         }
       }
