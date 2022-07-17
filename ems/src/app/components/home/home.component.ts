@@ -27,23 +27,36 @@ export class HomeComponent implements OnInit {
 
   empdata: any;
   empdataparsed: any;
-  isNorecords:boolean = false;
-
-  constructor(private mainService: MainService,private router:Router,public dialog: MatDialog) { }
+  isNorecords: boolean = false;
+  empDataResult: any;
+  constructor(private mainService: MainService, private router: Router, public dialog: MatDialog) { }
 
 
   ngOnInit(): void {
-    this.getEmployeeDetails();
+    this.loadEmployeeDetails();
   }
 
+  loadEmployeeDetails() {
+      this.mainService.loadEmployeeData().subscribe(res => {
+      this.empDataResult = res;
+      this.dataSource = new MatTableDataSource(this.empDataResult.data);
+      this.dataSource.paginator = this.tableOnePaginator;
+      this.dataSource.sort = this.sort;
 
+      const stringEmpObj = JSON.stringify(this.empDataResult.data);
+      localStorage.setItem("empData", stringEmpObj);
+    }, error => {
+      this.isNorecords = true;
+    });
+
+  }
+
+  
   getEmployeeDetails() {
     //get data from local storage
     this.empdata = this.mainService.getEmployeeData();
     this.empdataparsed = JSON.parse(this.empdata);
-    if(this.empdataparsed == null){
-      this.isNorecords = true;
-    }
+  
     //assigned parsed data to table dataSource
     this.dataSource = new MatTableDataSource(this.empdataparsed);
     this.dataSource.paginator = this.tableOnePaginator;
@@ -61,6 +74,7 @@ export class HomeComponent implements OnInit {
 
     // toclose dialog
     dialogRef.afterClosed().subscribe(result => {
+      // to refresh data in home page
       this.getEmployeeDetails();
     });
   }
@@ -79,8 +93,8 @@ export class HomeComponent implements OnInit {
 
   }
 
-// to logout
-  logout(){
+  // to logout
+  logout() {
     this.router.navigate(['login']);
   }
 
@@ -95,7 +109,7 @@ export class HomeComponent implements OnInit {
 export class DialogAddEmployeeDialog {
   addForm: FormGroup;
   empData: any;
-  constructor(private fb: FormBuilder, private mainService: MainService,private toastr: ToastrService,
+  constructor(private fb: FormBuilder, private mainService: MainService, private toastr: ToastrService,
     public dialogRef: MatDialogRef<DialogAddEmployeeDialog>,
 
   ) {
@@ -117,14 +131,14 @@ export class DialogAddEmployeeDialog {
     // generating new id for new employee
     this.addForm.controls['id'].setValue(parsedData.length + 1);
 
-    if(this.addForm.valid){
+    if (this.addForm.valid) {
 
       parsedData.push(this.addForm.value);
       this.mainService.updateEmployeeData(JSON.stringify(parsedData));
       this.toastr.success('Employee added successfully!');
       this.dialogRef.close();
     }
-  
+
   }
 
   cancel(): void {
@@ -145,12 +159,12 @@ export interface DialogData {
   selector: 'dialog-edit-employee-dialog',
   templateUrl: 'dialog-edit-employee-dialog.html',
   styleUrls: ['./home.component.css']
-  
+
 })
 export class DialogEditEmployeeDialog {
   editForm: FormGroup;
   empData: any;
-  constructor(private fb: FormBuilder, private mainService: MainService,private toastr: ToastrService,
+  constructor(private fb: FormBuilder, private mainService: MainService, private toastr: ToastrService,
     public dialogRef: MatDialogRef<DialogEditEmployeeDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {
@@ -166,16 +180,16 @@ export class DialogEditEmployeeDialog {
 
   // function for editing employee
   editEmployee() {
-    if(this.editForm.valid){
+    if (this.editForm.valid) {
       this.empData = this.mainService.getEmployeeData();
       let parsedData = JSON.parse(this.empData);
-  
+
       for (let i = 0; i < parsedData.length; i++) {
         if (parsedData[i].id == this.editForm.get('id')?.value) {
           parsedData[i] = this.editForm.value;
         }
       }
-  
+
       this.mainService.updateEmployeeData(JSON.stringify(parsedData));
       this.toastr.success('Employee edited successfully!');
 

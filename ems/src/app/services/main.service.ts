@@ -11,26 +11,18 @@ export class MainService {
 
   getEmployeeUrl = "http://dummy.restapiexample.com/api/v1/employees";
 
-  constructor(private http:HttpClient) {
-    this.loadEmployeeData();
-   }
+  constructor(private http:HttpClient) { }
 
   loadEmployeeData(){
-    this.http.get(this.getEmployeeUrl).subscribe(res =>{
-      this.empData = res;
-      const jsonEmpObj =  JSON.stringify(this.empData.data);
-      localStorage.setItem("empData",jsonEmpObj);
-    },error =>{
-      console.log(error);
-    });
+   return this.http.get(this.getEmployeeUrl);
   }
 
   getEmployeeData(){
     let data = localStorage.getItem('empData');
     return data;
   }
-  updateEmployeeData(jsonEmpObj:any){
-    localStorage.setItem("empData",jsonEmpObj);
+  updateEmployeeData(stringEmpObj:any){
+    localStorage.setItem("empData",stringEmpObj);
   }
 }
 // local storage limited to handle only string key/value pairs.
