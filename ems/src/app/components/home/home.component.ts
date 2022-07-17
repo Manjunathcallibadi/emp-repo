@@ -46,7 +46,8 @@ export class HomeComponent implements OnInit {
       const stringEmpObj = JSON.stringify(this.empDataResult.data);
       localStorage.setItem("empData", stringEmpObj);
     }, error => {
-      this.isNorecords = true;
+      // this.isNorecords = true;
+      this.getEmployeeDetails();
     });
 
   }
@@ -56,7 +57,9 @@ export class HomeComponent implements OnInit {
     //get data from local storage
     this.empdata = this.mainService.getEmployeeData();
     this.empdataparsed = JSON.parse(this.empdata);
-  
+    if(this.empdataparsed == null){
+        this.isNorecords = true;
+    }
     //assigned parsed data to table dataSource
     this.dataSource = new MatTableDataSource(this.empdataparsed);
     this.dataSource.paginator = this.tableOnePaginator;
