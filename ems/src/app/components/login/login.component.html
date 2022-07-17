@@ -1,15 +1,16 @@
+
+
 <div class="bg-image">
-    <div class="container">
-        <div class="login">
-            <form [formGroup]="loginForm">
-                <mat-form-field>
-                    <!-- <mat-label>Employee id</mat-label> -->
-                    <input matInput placeholder="Enter Employee Id" type="text" formControlName="employee_id" required>
-                </mat-form-field>
-                <div>
-                    <button mat-raised-button class="login-btn" type="submit" (click)="login()">Login</button>
-                </div>
-            </form>
-        </div>
+    <div style="display:flex;justify-content:center">
+        <form [formGroup]="loginForm" style="margin-top: 8%;margin-left: 45%;">
+            <mat-form-field>
+                <input matInput placeholder="Enter Employee Id" type="text" formControlName="employee_id" required>
+            </mat-form-field>
+            <div>
+                <button mat-raised-button class="login-btn" type="submit" (click)="login()">Login</button>
+            </div>
+        </form>
     </div>
 </div>
+
+

@@ -4,26 +4,39 @@
   table {
     width: 100%;
   }
-  .container{
-    margin-top:10px ;
+  .toolbar{
+    position: fixed;
   }
+  .header{
+    height: 55px;
+    display: flex;
+    z-index: 2;
+    position: fixed;
+  }
+  .content{
+    margin-top: 3rem;
+    height: 80vh;
+  }
+
   .addButton{
     margin-bottom: 10px;
   }
+
   th.mat-sort-header-sorted {
     color: black;
   }
 
-  .mat-row:nth-child(even) { 
+   .mat-row:nth-child(even) { 
     background-color: lavender; 
   } 
   th.mat-header-cell, td.mat-cell {
     text-align: center;
     border: 1px solid #CCC;
+
   }
   .mat-header-cell {
     background-color:slategrey;
     color:wheat;
     font-size: 15px;
-    height: 5px;
-  }
+    
+  } 

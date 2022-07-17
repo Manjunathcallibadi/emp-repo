@@ -6,9 +6,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component:LoginComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'home', component:HomeComponent },
-  {path:'**',component:PageNotFoundComponent}
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

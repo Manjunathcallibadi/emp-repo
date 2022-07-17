@@ -17,6 +17,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     HomeComponent,
     PageNotFoundComponent,
     DialogAddEmployeeDialog,
-    DialogEditEmployeeDialog
+    DialogEditEmployeeDialog,
+    
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatToolbarModule,
     MatIconModule,
     MatDialogModule,
+    MatSortModule
     
     
   ],

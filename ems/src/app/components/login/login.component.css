@@ -6,10 +6,10 @@
     background-image: url("/assets/images/HR3.jpg");
 }
 .login{
-    width:30%;
+    /* width:30%; */
     float: right;
     margin-top: 6rem;
 }
 .login-btn{
-    width: 55%;
+    width: 100%;
 }

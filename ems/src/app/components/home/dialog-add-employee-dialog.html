@@ -1,9 +1,7 @@
 
 <div mat-dialog-content>
+    <h2>Add Employee Details</h2>
     <form [formGroup]="addForm" fxLayoutAlign="stretch" fxLayout="column">
-        <!-- <mat-form-field>
-            <input matInput placeholder="Enter Employee Name" type="text" formControlName="id" required>
-        </mat-form-field> -->
         <mat-form-field>
             <input matInput placeholder="Enter Employee Name" type="text" formControlName="employee_name" required>
         </mat-form-field>
@@ -18,9 +16,6 @@
  
 </div>
 <div mat-dialog-actions>
-    <button (click)="cancel()">cancel</button>
-
-    <button (click)="save()">save</button>
-    
-  
+    <button mat-raised-button color="warn" (click)="cancel()"> Cancel </button>
+    <button mat-raised-button color="primary" (click)="save()" style="margin-left:40px;"> Save </button>  
 </div>
