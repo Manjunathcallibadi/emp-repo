@@ -1,6 +1,6 @@
 # emp-repo
 
-##Clone the repo: 
+#Clone the repo: 
 git clone https://github.com/Manjunathcallibadi/emp-repo.git
 
 cd ems
