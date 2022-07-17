@@ -6,6 +6,9 @@
             <mat-form-field>
                 <input matInput placeholder="Enter Employee Id" type="text" formControlName="employee_id" required>
             </mat-form-field>
+            <div *ngIf="errorMsg">
+            <small style="color:red ;">{{errorMsg}}</small>
+            </div>
             <div>
                 <button mat-raised-button class="login-btn" type="submit" (click)="login()">Login</button>
             </div>

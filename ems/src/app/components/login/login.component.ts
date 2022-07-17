@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  errorMsg:any;
 
   constructor(private fb: FormBuilder,private router:Router) { 
     this.loginForm = fb.group({
@@ -24,6 +25,8 @@ export class LoginComponent implements OnInit {
     //  console.log(this.loginForm.get('employee_id')?.value);
     if(this.loginForm.get('employee_id')?.value == "MN123"){
       this.router.navigate(['home']);
+    }else{
+      this.errorMsg = "Please enter valid employee id"
     }
   }
 

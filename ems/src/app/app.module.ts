@@ -18,6 +18,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,11 @@ import { MatSortModule } from '@angular/material/sort';
     MatToolbarModule,
     MatIconModule,
     MatDialogModule,
-    MatSortModule
+    MatSortModule,
+    // ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass :'toast-bottom-right'
+    })
     
     
   ],

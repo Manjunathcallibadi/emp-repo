@@ -6,6 +6,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSort, Sort } from '@angular/material/sort';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -70,6 +71,7 @@ export class HomeComponent implements OnInit {
 
   }
 
+
   logout(){
     this.router.navigate(['login']);
   }
@@ -84,7 +86,7 @@ export class HomeComponent implements OnInit {
 export class DialogAddEmployeeDialog {
   addForm: FormGroup;
   empData: any;
-  constructor(private fb: FormBuilder, private mainService: MainService,
+  constructor(private fb: FormBuilder, private mainService: MainService,private toastr: ToastrService,
     public dialogRef: MatDialogRef<DialogAddEmployeeDialog>,
 
   ) {
@@ -100,12 +102,15 @@ export class DialogAddEmployeeDialog {
   save() {
     this.empData = this.mainService.getEmployeeData();
     let parsedData = JSON.parse(this.empData);
-
     this.addForm.controls['id'].setValue(parsedData.length + 1);
 
-    parsedData.push(this.addForm.value);
-    this.mainService.updateEmployeeData(JSON.stringify(parsedData));
-    this.dialogRef.close();
+    if(this.addForm.valid){
+      parsedData.push(this.addForm.value);
+      this.mainService.updateEmployeeData(JSON.stringify(parsedData));
+      this.toastr.success('Employee added successfully!');
+      this.dialogRef.close();
+    }
+  
   }
 
   cancel(): void {
@@ -129,7 +134,7 @@ export interface DialogData {
 export class DialogEditEmployeeDialog {
   editForm: FormGroup;
   empData: any;
-  constructor(private fb: FormBuilder, private mainService: MainService,
+  constructor(private fb: FormBuilder, private mainService: MainService,private toastr: ToastrService,
     public dialogRef: MatDialogRef<DialogEditEmployeeDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {
@@ -146,18 +151,22 @@ export class DialogEditEmployeeDialog {
  
 
   save() {
-
-    this.empData = this.mainService.getEmployeeData();
-    let parsedData = JSON.parse(this.empData);
-
-    for (let i = 0; i < parsedData.length; i++) {
-      if (parsedData[i].id == this.editForm.get('id')?.value) {
-        parsedData[i] = this.editForm.value;
+    if(this.editForm.valid){
+      this.empData = this.mainService.getEmployeeData();
+      let parsedData = JSON.parse(this.empData);
+  
+      for (let i = 0; i < parsedData.length; i++) {
+        if (parsedData[i].id == this.editForm.get('id')?.value) {
+          parsedData[i] = this.editForm.value;
+        }
       }
+  
+      this.mainService.updateEmployeeData(JSON.stringify(parsedData));
+      this.toastr.success('Employee edited successfully!');
+
+      this.dialogRef.close();
     }
 
-    this.mainService.updateEmployeeData(JSON.stringify(parsedData));
-    this.dialogRef.close();
   }
 
   cancel(): void {

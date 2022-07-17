@@ -12,7 +12,7 @@ export class MainService {
   getEmployeeUrl = "http://dummy.restapiexample.com/api/v1/employees";
 
   constructor(private http:HttpClient) {
-    // this.loadEmployeeData();
+    this.loadEmployeeData();
    }
 
   loadEmployeeData(){
@@ -33,3 +33,5 @@ export class MainService {
     localStorage.setItem("empData",jsonEmpObj);
   }
 }
+// local storage limited to handle only string key/value pairs.
+// you can do like below using JSON.stringify and while getting value JSON.parse
