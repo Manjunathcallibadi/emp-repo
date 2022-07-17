@@ -61,7 +61,7 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
 
-        <div class="no-records" *ngIf="norecords == 0">No records found</div>
+        <div class="no-records" *ngIf="isNorecords">No records found</div>
 
         <mat-paginator #TableOnePaginator="matPaginator" [length]="5" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 50]"
             showFirstLastButtons></mat-paginator>

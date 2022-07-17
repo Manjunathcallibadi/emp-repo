@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
 
   empdata: any;
   empdataparsed: any;
-norecords:any;
+  isNorecords:boolean = false;
 
   constructor(private mainService: MainService,private router:Router,public dialog: MatDialog) { }
 
@@ -42,7 +42,7 @@ norecords:any;
     this.empdata = this.mainService.getEmployeeData();
     this.empdataparsed = JSON.parse(this.empdata);
     if(this.empdataparsed == null){
-      this.norecords = 0;
+      this.isNorecords = true;
     }
     //assigned parsed data to table dataSource
     this.dataSource = new MatTableDataSource(this.empdataparsed);
